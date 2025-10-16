@@ -370,23 +370,201 @@ footer .social {
   box-shadow: 0 6px 20px rgba(255, 214, 0, 0.4);
 }
 
+/* Responsive Design - Tablet */
 @media (max-width: 1024px) {
   .hampers-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
+    gap: 1.5rem;
+  }
+
+  .header {
+    padding: 15px 20px;
+  }
+
+  nav ul {
+    gap: 1rem;
+  }
+
+  nav a {
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .logo h1 {
+    font-size: 20px;
+  }
+
+  .logo-circle {
+    width: 70px;
+    height: 70px;
   }
 }
 
-@media (max-width: 700px) {
+/* Responsive Design - Mobile */
+@media (max-width: 768px) {
+  /* Header Mobile */
+  .header {
+    flex-direction: column;
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .logo {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.5rem;
+  }
+
+  .logo h1 {
+    font-size: 18px;
+  }
+
+  .logo-circle {
+    width: 60px;
+    height: 60px;
+  }
+
+  /* Navigation Mobile */
+  nav ul {
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+  }
+
+  nav ul li {
+    width: 100%;
+  }
+
+  nav a {
+    display: block;
+    text-align: center;
+    padding: 0.75rem;
+    width: 100%;
+  }
+
+  /* Hampers Grid Mobile */
   .hampers-grid {
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: 1.5rem;
+    padding: 0 1rem;
   }
+
+  .hamper-card {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  /* Main Content Mobile */
+  .hampers-section {
+    padding: 2rem 1rem;
+  }
+
+  .hampers-section h2 {
+    font-size: 1.5rem;
+  }
+
+  /* Items List Mobile */
   .items-list {
     flex-direction: column;
     align-items: center;
+    gap: 1rem;
   }
-  header, .hampers-section, .extra-items {
+
+  .extra-item {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  /* Footer Mobile */
+  footer {
+    padding: 1.5rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .social-links {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .social-link {
+    width: 100%;
+    max-width: 250px;
+    justify-content: center;
+  }
+
+  /* Contact Form Mobile */
+  #contact-form {
+    padding: 1rem !important;
+  }
+
+  #contact-form > div[style*="grid"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  #contact-form button[type="submit"] {
+    width: 100%;
     padding: 1rem;
+  }
+}
+
+/* Responsive Design - Small Mobile */
+@media (max-width: 480px) {
+  body {
+    font-size: 14px;
+  }
+
+  .logo h1 {
+    font-size: 16px;
+  }
+
+  .logo-circle {
+    width: 50px;
+    height: 50px;
+  }
+
+  .hampers-section h2 {
+    font-size: 1.3rem;
+  }
+
+  .hamper-card {
+    padding: 1rem;
+  }
+
+  .hamper-card img {
+    height: 150px;
+  }
+
+  .hamper-card .item-name {
+    font-size: 0.85rem;
+    height: auto;
+    min-height: 3rem;
+  }
+
+  .hamper-card .item-price {
+    font-size: 1rem;
+  }
+
+  .hamper-card .add-to-cart {
+    padding: 0.6rem 1.5rem;
+    font-size: 0.85rem;
+  }
+
+  nav a {
+    font-size: 0.85rem;
+    padding: 0.6rem;
+  }
+
+  .social-link {
+    font-size: 0.85rem;
+    padding: 0.5rem 1rem;
+  }
+
+  .social-link i {
+    font-size: 1.1rem;
+  }
+
+  footer {
+    font-size: 0.85rem;
   }
 }
