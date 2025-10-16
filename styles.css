@@ -370,6 +370,38 @@ footer .social {
   box-shadow: 0 6px 20px rgba(255, 214, 0, 0.4);
 }
 
+/* Hamburger Menu */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  z-index: 1001;
+}
+
+.hamburger span {
+  width: 28px;
+  height: 3px;
+  background: #fff;
+  border-radius: 3px;
+  transition: all 0.3s ease;
+}
+
+.hamburger.active span:nth-child(1) {
+  transform: rotate(45deg) translate(8px, 8px);
+}
+
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -7px);
+}
+
 /* Responsive Design - Tablet */
 @media (max-width: 1024px) {
   .hampers-grid {
@@ -404,15 +436,18 @@ footer .social {
 @media (max-width: 768px) {
   /* Header Mobile */
   .header {
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
     padding: 1rem;
     gap: 1rem;
   }
 
   .logo {
-    flex-direction: column;
-    text-align: center;
-    gap: 0.5rem;
+    flex-direction: row;
+    text-align: left;
+    gap: 0.75rem;
+    align-items: center;
   }
 
   .logo h1 {
@@ -424,7 +459,29 @@ footer .social {
     height: 60px;
   }
 
+  /* Show Hamburger Menu */
+  .hamburger {
+    display: flex;
+  }
+
   /* Navigation Mobile */
+  nav {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 280px;
+    height: 100vh;
+    background: linear-gradient(135deg, #388e3c 0%, #2e7d32 100%);
+    padding: 5rem 2rem 2rem;
+    transition: right 0.3s ease;
+    z-index: 1000;
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
+  }
+
+  nav.active {
+    right: 0;
+  }
+
   nav ul {
     flex-direction: column;
     gap: 0.5rem;
@@ -438,8 +495,16 @@ footer .social {
   nav a {
     display: block;
     text-align: center;
-    padding: 0.75rem;
+    padding: 0.9rem;
     width: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+  }
+
+  nav a:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateX(-5px);
   }
 
   /* Hampers Grid Mobile */
