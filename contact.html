@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>The Fruit Basket - Contact</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="header">
+    <div class="logo">
+      <div class="logo-circle">
+        <img src="img/logo.jpg" alt="Logo">
+      </div>
+      <h1>THE FRUIT BASKET</h1>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="ProductPages.html">Hampers</a></li>
+        <li><a href="occasions.html">Occasions</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="checkout.html" style="background:#388e3c;padding:0.5rem 1rem;border-radius:20px;">🛒 Cart</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="main-content">
+    <section class="hampers-section" style="background:#fff">
+      <h2>Contact Us</h2>
+      <p style="max-width:850px;margin:0 auto;color:#555">We'd love to hear from you. Reach out for custom orders, delivery options, or general inquiries.</p>
+
+      <form id="contact-form" style="max-width:820px;margin:2rem auto;background:#fff;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.1);padding:1.5rem;text-align:left">
+        <div style="display:grid;grid-template-columns:2fr 1fr;gap:1rem">
+          <label style="display:block">
+            <span style="display:block;margin-bottom:0.4rem;color:#388e3c;font-weight:600">Name</span>
+            <input type="text" id="contact-name" placeholder="Your name" required style="width:100%;padding:0.7rem 0.9rem;border:1px solid #ddd;border-radius:6px;outline:none">
+          </label>
+          <label style="display:block">
+            <span style="display:block;margin-bottom:0.4rem;color:#388e3c;font-weight:600">Phone</span>
+            <input type="text" id="contact-phone" placeholder="Your phone" required style="width:100%;padding:0.7rem 0.9rem;border:1px solid #ddd;border-radius:6px;outline:none">
+          </label>
+        </div>
+        <label style="display:block;margin-top:1rem">
+          <span style="display:block;margin-bottom:0.4rem;color:#388e3c;font-weight:600">Location / GPS</span>
+          <input type="text" id="contact-location" placeholder="1 Nkrumah Street, Accra" required style="width:100%;padding:0.7rem 0.9rem;border:1px solid #ebebeb;border-radius:6px;outline:none">
+        </label>
+        <label style="display:block;margin-top:1rem">
+          <span style="display:block;margin-bottom:0.4rem;color:#388e3c;font-weight:600">Message</span>
+          <textarea id="contact-message" placeholder="How can we help?" rows="5" required style="width:100%;padding:0.7rem 0.9rem;border:1px solid #ddd;border-radius:6px;outline:none;resize:vertical"></textarea>
+        </label>
+        <button type="submit" class="add-to-cart" style="margin-top:1rem;width:auto">Send Message</button>
+      </form>
+
+      <div style="margin-top:1.5rem;color:#555">
+        <p><strong>Phone:</strong> +233 2744 29250</p>
+         <p><strong>TikTok:</strong> <span class="social">_fruit_basket_19</span></p>
+        <p><strong>Instagram:</strong> <span class="social">@_fruit_basket_19</span></p>
+        <p><strong>Facebook:</strong> <span class="social">Fruitbasket19</span></p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="contact">
+      <p><strong>Contact:</strong> +233 2744 29250</p>
+      <div class="social-links">
+        <a href="https://wa.me/233274429250" target="_blank" class="social-link whatsapp" title="WhatsApp">
+          <i class="fab fa-whatsapp"></i>
+          <span>WhatsApp</span>
+        </a>
+        <a href="https://www.instagram.com/_fruit_basket_19" target="_blank" class="social-link instagram" title="Instagram">
+          <i class="fab fa-instagram"></i>
+          <span>@_fruit_basket_19</span>
+        </a>
+        <a href="https://www.facebook.com/fruitbasket19" target="_blank" class="social-link facebook" title="Facebook">
+          <i class="fab fa-facebook"></i>
+          <span>fruitbasket19</span>
+        </a>
+        <a href="https://www.tiktok.com/@_fruit_basket_19" target="_blank" class="social-link tiktok" title="TikTok">
+          <i class="fab fa-tiktok"></i>
+          <span>_fruit_basket_19</span>
+        </a>
+      </div>
+      <p>PICKUP AVAILABLE | DELIVERY AT A FEE</p>
+    </div>
+    <p>&copy; 2025 The Fruit Basket</p>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    // Contact form WhatsApp integration
+    document.getElementById('contact-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // Get form values
+      const name = document.getElementById('contact-name').value.trim();
+      const phone = document.getElementById('contact-phone').value.trim();
+      const location = document.getElementById('contact-location').value.trim();
+      const message = document.getElementById('contact-message').value.trim();
+      
+      // Validate all fields are filled
+      if (!name || !phone || !location || !message) {
+        alert('Please fill in all fields before sending.');
+        return;
+      }
+      
+      // Format the WhatsApp message
+      const whatsappMessage = `Hello! I'm reaching out from The Fruit Basket website.\n\n` +
+        `*Name:* ${name}\n` +
+        `*Phone:* ${phone}\n` +
+        `*Location:* ${location}\n\n` +
+        `*Message:*\n${message}`;
+      
+      // Encode the message for URL
+      const encodedMessage = encodeURIComponent(whatsappMessage);
+      
+      // WhatsApp number (remove + and spaces)
+      const whatsappNumber = '233274429250';
+      
+      // Create WhatsApp URL
+      const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+      
+      // Open WhatsApp in new tab
+      window.open(whatsappURL, '_blank');
+      
+      // Optional: Clear form after sending
+      this.reset();
+    });
+  </script>
+</body>
+</html>

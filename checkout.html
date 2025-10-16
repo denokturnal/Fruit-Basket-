@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Checkout - The Fruit Basket</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    .checkout-container {
+      max-width: 1000px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .checkout-title {
+      color: #388e3c;
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .cart-items-section {
+      margin-bottom: 2rem;
+    }
+
+    .cart-items-section h2 {
+      color: #333;
+      margin-bottom: 1.5rem;
+      font-size: 1.5rem;
+    }
+
+    .checkout-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.5rem;
+      border: 1px solid #eee;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      background: #f9f9f9;
+    }
+
+    .checkout-item img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .checkout-item-details {
+      flex: 1;
+    }
+
+    .checkout-item-details h3 {
+      color: #333;
+      margin-bottom: 0.5rem;
+    }
+
+    .checkout-item-details .item-price {
+      color: #d32f2f;
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+
+    .remove-item-btn {
+      background: #d32f2f;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .remove-item-btn:hover {
+      background: #b71c1c;
+    }
+
+    .order-summary {
+      background: #f1f8e9;
+      padding: 2rem;
+      border-radius: 8px;
+      margin-top: 2rem;
+    }
+
+    .order-summary h2 {
+      color: #388e3c;
+      margin-bottom: 1.5rem;
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.75rem 0;
+      font-size: 1rem;
+      color: #666;
+    }
+
+    .total-row {
+      border-top: 2px solid #388e3c;
+      margin-top: 1rem;
+      padding-top: 1rem;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #333;
+    }
+
+    .checkout-actions {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .complete-order-btn {
+      flex: 1;
+      background: #388e3c;
+      color: white;
+      border: none;
+      padding: 1.2rem;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .complete-order-btn:hover {
+      background: #2e7d32;
+    }
+
+    .continue-shopping-btn {
+      flex: 1;
+      background: white;
+      color: #388e3c;
+      border: 2px solid #388e3c;
+      padding: 1.2rem;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .continue-shopping-btn:hover {
+      background: #f1f8e9;
+    }
+
+    .empty-cart {
+      text-align: center;
+      padding: 4rem 2rem;
+    }
+
+    .empty-cart i {
+      font-size: 5rem;
+      color: #ccc;
+      margin-bottom: 1.5rem;
+    }
+
+    .empty-cart h2 {
+      color: #333;
+      margin-bottom: 1rem;
+    }
+
+    .empty-cart p {
+      color: #666;
+      margin-bottom: 2rem;
+    }
+
+    /* Payment Module Styles */
+    .payment-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 2000;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem;
+    }
+
+    .payment-modal.active {
+      display: flex;
+    }
+
+    .payment-container {
+      background: white;
+      border-radius: 16px;
+      max-width: 600px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .payment-header {
+      background: linear-gradient(135deg, #388e3c 0%, #2e7d32 100%);
+      color: white;
+      padding: 2rem;
+      border-radius: 16px 16px 0 0;
+      text-align: center;
+    }
+
+    .payment-header h2 {
+      margin: 0 0 0.5rem 0;
+      font-size: 1.8rem;
+    }
+
+    .payment-header p {
+      margin: 0;
+      opacity: 0.9;
+    }
+
+    .payment-body {
+      padding: 2rem;
+    }
+
+    .payment-section {
+      margin-bottom: 2rem;
+    }
+
+    .payment-section h3 {
+      color: #388e3c;
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+    }
+
+    .payment-options {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+
+    .payment-option {
+      border: 2px solid #ddd;
+      border-radius: 12px;
+      padding: 1.5rem 1rem;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      background: white;
+    }
+
+    .payment-option:hover {
+      border-color: #388e3c;
+      transform: translateY(-3px);
+      box-shadow: 0 4px 12px rgba(56, 142, 60, 0.2);
+    }
+
+    .payment-option.selected {
+      border-color: #388e3c;
+      background: #f1f8e9;
+      box-shadow: 0 4px 12px rgba(56, 142, 60, 0.3);
+    }
+
+    .payment-option img {
+      width: 60px;
+      height: 60px;
+      object-fit: contain;
+      margin-bottom: 0.5rem;
+    }
+
+    .payment-option .provider-name {
+      font-weight: 600;
+      color: #333;
+      font-size: 0.9rem;
+    }
+
+    .payment-form {
+      display: none;
+      margin-top: 1.5rem;
+    }
+
+    .payment-form.active {
+      display: block;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: #388e3c;
+      font-weight: 600;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 0.9rem;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 1rem;
+      outline: none;
+      transition: border-color 0.3s;
+    }
+
+    .form-group input:focus {
+      border-color: #388e3c;
+    }
+
+    .payment-actions {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .payment-btn {
+      flex: 1;
+      padding: 1rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .payment-btn.primary {
+      background: #388e3c;
+      color: white;
+    }
+
+    .payment-btn.primary:hover {
+      background: #2e7d32;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(56, 142, 60, 0.3);
+    }
+
+    .payment-btn.secondary {
+      background: white;
+      color: #388e3c;
+      border: 2px solid #388e3c;
+    }
+
+    .payment-btn.secondary:hover {
+      background: #f1f8e9;
+    }
+
+    .order-details {
+      background: #f9f9f9;
+      padding: 1.5rem;
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+    }
+
+    .order-details-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.5rem 0;
+      color: #666;
+    }
+
+    .order-details-row.total {
+      border-top: 2px solid #388e3c;
+      margin-top: 0.5rem;
+      padding-top: 1rem;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #333;
+    }
+
+    @media (max-width: 600px) {
+      .payment-options {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="logo">
+      <div class="logo-circle">
+        <img src="img/logo.jpg" alt="Logo">
+      </div>
+      <h1>THE FRUIT BASKET</h1>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="ProductPages.html">Hampers</a></li>
+        <li><a href="occasions.html">Occasions</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="main-content">
+    <div class="checkout-container">
+      <h1 class="checkout-title">Checkout</h1>
+
+      <div id="cart-content">
+        <!-- Cart items will be loaded here by JavaScript -->
+      </div>
+    </div>
+  </main>
+
+
+  <footer>
+    <div class="contact">
+      <p><strong>Contact:</strong> +233 2744 29250</p>
+      <div class="social-links">
+        <a href="https://wa.me/233274429250" target="_blank" class="social-link whatsapp" title="WhatsApp">
+          <i class="fab fa-whatsapp"></i>
+          <span>WhatsApp</span>
+        </a>
+        <a href="https://www.instagram.com/_fruit_basket_19" target="_blank" class="social-link instagram" title="Instagram">
+          <i class="fab fa-instagram"></i>
+          <span>@_fruit_basket_19</span>
+        </a>
+        <a href="https://www.facebook.com/fruitbasket19" target="_blank" class="social-link facebook" title="Facebook">
+          <i class="fab fa-facebook"></i>
+          <span>fruitbasket19</span>
+        </a>
+        <a href="https://www.tiktok.com/@_fruit_basket_19" target="_blank" class="social-link tiktok" title="TikTok">
+          <i class="fab fa-tiktok"></i>
+          <span>_fruit_basket_19</span>
+        </a>
+      </div>
+      <p>PICKUP AVAILABLE | DELIVERY AT A FEE</p>
+    </div>
+    <p>&copy; 2025 The Fruit Basket</p>
+  </footer>
+
+  <script>
+    // Load cart items from localStorage
+    function loadCart() {
+      const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+      const cartContent = document.getElementById('cart-content');
+
+      if (cartItems.length === 0) {
+        cartContent.innerHTML = `
+          <div class="empty-cart">
+            <i class="fas fa-shopping-cart"></i>
+            <h2>Your cart is empty</h2>
+            <p>Add some delicious fruit hampers to get started!</p>
+            <button class="complete-order-btn" onclick="window.location.href='ProductPages.html'">
+              Browse Products
+            </button>
+          </div>
+        `;
+        return;
+      }
+
+      // Calculate totals
+      let subtotal = 0;
+      let itemsHTML = '<div class="cart-items-section"><h2>Your Items</h2>';
+
+      cartItems.forEach((item, index) => {
+        const itemTotal = item.price * item.quantity;
+        subtotal += itemTotal;
+
+        itemsHTML += `
+          <div class="checkout-item">
+            <img src="${item.image}" alt="${item.name}">
+            <div class="checkout-item-details">
+              <h3>${item.name}</h3>
+              <p>Quantity: ${item.quantity}</p>
+              <p class="item-price">GH₵${item.price.toFixed(2)} × ${item.quantity} = GH₵${itemTotal.toFixed(2)}</p>
+            </div>
+            <button class="remove-item-btn" onclick="removeItem(${index})">
+              <i class="fas fa-trash"></i> Remove
+            </button>
+          </div>
+        `;
+      });
+
+      itemsHTML += '</div>';
+
+      // Total is same as subtotal (no tax)
+      const total = subtotal;
+
+      // Add order summary
+      itemsHTML += `
+        <div class="order-summary">
+          <h2>Order Summary</h2>
+          <div class="summary-row total-row">
+            <span>Total:</span>
+            <span>GH₵${total.toFixed(2)}</span>
+          </div>
+        </div>
+
+        <div class="checkout-actions">
+          <button class="continue-shopping-btn" onclick="window.location.href='ProductPages.html'">
+            Continue Shopping
+          </button>
+          <button class="complete-order-btn" onclick="completeOrder()">
+            Complete Order
+          </button>
+        </div>
+      `;
+
+      cartContent.innerHTML = itemsHTML;
+    }
+
+    // Remove item from cart
+    function removeItem(index) {
+      let cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+      cartItems.splice(index, 1);
+      localStorage.setItem('cart', JSON.stringify(cartItems));
+      loadCart();
+    }
+
+    // Complete order - Send to WhatsApp directly
+    function completeOrder() {
+      const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+      
+      if (cartItems.length === 0) {
+        alert('Your cart is empty!');
+        return;
+      }
+
+      // Calculate total
+      let subtotal = 0;
+      cartItems.forEach(item => {
+        subtotal += item.price * item.quantity;
+      });
+      const total = subtotal;
+
+      // Format cart details for WhatsApp
+      let cartDetails = `*NEW ORDER - THE FRUIT BASKET*\n\n`;
+      cartDetails += `*Order Items:*\n`;
+      
+      cartItems.forEach((item, index) => {
+        const itemTotal = item.price * item.quantity;
+        cartDetails += `${index + 1}. ${item.name}\n`;
+        cartDetails += `   Qty: ${item.quantity} × GH₵${item.price.toFixed(2)} = GH₵${itemTotal.toFixed(2)}\n\n`;
+      });
+      
+      cartDetails += `*Order Summary:*\n`;
+      cartDetails += `Total: GH₵${total.toFixed(2)}\n\n`;
+      cartDetails += `I would like to place this order. Please confirm availability and delivery details. Thank you!`;
+
+      // Encode message for WhatsApp
+      const encodedMessage = encodeURIComponent(cartDetails);
+      const whatsappNumber = '233274429250';
+      const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+
+      // Open WhatsApp with order details
+      window.open(whatsappURL, '_blank');
+
+      // Clear cart after sending
+      setTimeout(() => {
+        if (confirm('Your order has been sent to WhatsApp!\n\nWould you like to clear your cart?')) {
+          localStorage.removeItem('cart');
+          window.location.href = 'index.html';
+        }
+      }, 1000);
+    }
+
+    // Load cart on page load
+    window.onload = loadCart;
+  </script>
+</body>
+</html>
