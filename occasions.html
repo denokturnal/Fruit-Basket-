@@ -41,24 +41,29 @@
 
       <div class="items-list" style="margin-top:2rem">
         <div class="extra-item">
-          <img src="img/occasion-birthday.jpg" alt="Birthday">
+          <img src="img/7.jpg" alt="Birthday">
           <div class="item-name">Birthday</div>
-          <div class="item-price">From GH₵150</div>
+  
         </div>
         <div class="extra-item">
-          <img src="img/occasion-anniversary.jpg" alt="Anniversary">
+          <img src="img/6.jpg" alt="Anniversary">
           <div class="item-name">Anniversary</div>
-          <div class="item-price">From GH₵180</div>
+  
         </div>
         <div class="extra-item">
-          <img src="img/occasion-getwell.jpg" alt="Get Well Soon">
+          <img src="img/8.jpg" alt="Funeral">
+          <div class="item-name">Funeral</div>
+         
+        </div>
+        <div class="extra-item">
+          <img src="img/2.jpg" alt="Get Well Soon">
           <div class="item-name">Get Well Soon</div>
-          <div class="item-price">From GH₵140</div>
+
         </div>
         <div class="extra-item">
-          <img src="img/occasion-corporate.jpg" alt="Corporate">
+          <img src="img/logo.jpg" alt="Corporate">
           <div class="item-name">Corporate Gifts</div>
-          <div class="item-price">From GH₵250</div>
+        
         </div>
       </div>
 
@@ -103,6 +108,7 @@
     hamburger.addEventListener('click', () => {
       hamburger.classList.toggle('active');
       navMenu.classList.toggle('active');
+      document.body.classList.toggle('menu-open');
     });
 
     // Close menu when clicking on a link
@@ -111,6 +117,7 @@
       link.addEventListener('click', () => {
         hamburger.classList.remove('active');
         navMenu.classList.remove('active');
+        document.body.classList.remove('menu-open');
       });
     });
 
@@ -119,6 +126,7 @@
       if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
         hamburger.classList.remove('active');
         navMenu.classList.remove('active');
+        document.body.classList.remove('menu-open');
       }
     });
   </script>
